@@ -63,20 +63,18 @@ class Database {
       throw new HttpError(400, 'Invalid id was provided');
     }
 
-    const { name, description, status } = parseTicket(body);
+    const parsedBody = parseTicket(body, true);
     const indexToEdit = this.tickets.findIndex((ticket) => ticket.id === id);
 
     if (indexToEdit === -1) {
       return undefined;
     }
 
-    const ticket = this.tickets[indexToEdit];
+    const ticketToEdit = this.tickets[indexToEdit];
 
-    ticket.name = name;
-    ticket.description = description;
-    ticket.status = status;
+    Object.assign(ticketToEdit, parsedBody);
 
-    return ticket;
+    return ticketToEdit;
   }
 }
 

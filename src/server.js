@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const http = require('http');
 const Koa = require('koa');
 const koaBody = require('koa-body');
@@ -43,7 +42,6 @@ async function routeHandler(ctx) {
         checkHandlerMethod(method, httpMethod, 'POST');
 
         ctx.response.body = { ticket: database.addNewTicket(body) };
-        console.log(body);
         return;
 
       case 'editTicket':
